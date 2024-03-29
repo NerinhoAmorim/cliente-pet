@@ -26,9 +26,7 @@ public class ClienteApplicationService implements ClienteService {
 		log.info("[inicia] ApplicationService - criaCliente");
 		Cliente cliente = clienteRepository.salva(new Cliente(clienteRequest));
 		log.info("[finaliza] ApplicationService - criaCliente");
-		return ClienteResponse.builder()
-				.idCliente(cliente.getIdCliente())
-				.build();
+		return ClienteResponse.builder().idCliente(cliente.getIdCliente()).build();
 	}
 
 	@Override
@@ -42,8 +40,9 @@ public class ClienteApplicationService implements ClienteService {
 	@Override
 	public ClienteDetalhadoResponse buscaClienteAtravesId(UUID idCliente) {
 		log.info("[inicia] ApplicationService - buscaClienteAtravesId(UUID");
+		Cliente cliente = clienteRepository.buscaClienteAtravesId(idCliente); 
 		log.info("[finaliza] ApplicationService - buscaClienteAtravesId(UUID");
-		return null;
+		return new ClienteDetalhadoResponse(cliente);
 	}
 
 }
