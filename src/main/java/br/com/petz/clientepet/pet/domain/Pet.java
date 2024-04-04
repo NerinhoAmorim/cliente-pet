@@ -11,9 +11,11 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import br.com.petz.clientepet.pet.application.api.PetRequest;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,6 +28,9 @@ public class Pet {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(columnDefinition = "uuid", name = "idPet", updatable = false, unique = true, nullable = false)
 	private UUID idPet;
+	@NotNull
+	@Column(columnDefinition = "uuid", name = "idClienteTutor",  nullable = false)
+	private UUID idClienteTutor;
 	@NotBlank
 	private String nomePet;
 	@Enumerated(EnumType.STRING)
@@ -39,15 +44,29 @@ public class Pet {
 	@Enumerated(EnumType.STRING)
 	@NotNull
 	private SexoPet sexo;
-	private String pelagemCor;		
+	private String pelagemCor;
 	@NotNull
 	private LocalDate dataNascimento;
-	private String rga;		
-	private Integer peso;		
+	private String rga;
+	private Integer peso;
 
 	private LocalDateTime dataHoraDoCadastro;
 	private LocalDateTime dataHoraDaUltimaAlteracao;
 
+	public Pet(UUID idCliente, @Valid PetRequest petRequest) {
+		this.idClienteTutor = idCliente;
+		this.nomePet = petRequest.getNomePet();
+		this.porte = petRequest.getPorte();
+		this.tipoPet = petRequest.getTipoPet();
+		this.microchip =petRequest.getMicrochip();
+		this.raca = petRequest.getRaca();
+		this.sexo = petRequest.getSexo();
+		this.pelagemCor = petRequest.getPelagemCor();
+		this.dataNascimento = petRequest.getDataNascimento();
+		this.rga = petRequest.getRga();
+		this.peso = petRequest.getPeso();
+		this.dataHoraDoCadastro = LocalDateTime.now();
 
+	}
 
 }
