@@ -52,4 +52,10 @@ public class PetInfraRepository implements PetRepository {
 		
 	}
 
+	@Override
+	public void deletaPetPeloId(UUID idPet) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
