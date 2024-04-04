@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.petz.clientepet.pet.application.service.PetService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+
 @RestController
 @Log4j2
 @RequiredArgsConstructor
@@ -20,7 +21,7 @@ public class PetController implements PetAPI {
 	@Override
 	public PetResponse postPet(UUID idCliente, @Valid PetRequest petRequest) {
 		log.info("[inicia] PetController - postPet ");
-		log.info("[idCliente] {}", idCliente );
+		log.info("[idCliente] {}", idCliente);
 		PetResponse pet = petService.criaPet(idCliente, petRequest);
 		log.info("[finaliza] PetController - postPet ");
 		return pet;
@@ -29,8 +30,8 @@ public class PetController implements PetAPI {
 	@Override
 	public List<PetClienteListResponse> getPetDoClienteComId(UUID idCliente) {
 		log.info("[inicia] PetController - getPetDoClienteComId ");
-		log.info("[idCliente] {}", idCliente );
-		List<PetClienteListResponse	> petsDoCliente = petService.buscaPetsDoClienteComId(idCliente);
+		log.info("[idCliente] {}", idCliente);
+		List<PetClienteListResponse> petsDoCliente = petService.buscaPetsDoClienteComId(idCliente);
 		log.info("[finaliza] PetController - getPetDoClienteComId ");
 		return petsDoCliente;
 	}
@@ -38,10 +39,10 @@ public class PetController implements PetAPI {
 	@Override
 	public PetClienteDetalhesResponse getPetDoClienteComId(UUID idCliente, UUID idPet) {
 		log.info("[inicia] PetController - getPetDoClienteComId ");
-		log.info("[idCliente] {} - [idPet]", idCliente, idPet );
+		log.info("[idCliente] {} - [idPet]", idCliente, idPet);
+		PetClienteDetalhesResponse pet = petService.buscaPetDoClienteComId(idCliente, idPet);
 		log.info("[finaliza] PetController - getPetDoClienteComId ");
-
-		return null;
+		return pet;
 	}
 
 }
